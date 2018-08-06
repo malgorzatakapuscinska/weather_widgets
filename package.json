@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack"
+    "start": "webpack-dev-server --inline --hot --config ./webpack.config.js"
   },
   "author": "Małgorzata Kapuścińska",
   "license": "ISC",
@@ -18,7 +18,8 @@
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "webpack": "^4.16.4"
+    "webpack": "^4.16.4",
+    "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
     "webpack-cli": "^3.1.0"
