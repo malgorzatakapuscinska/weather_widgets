@@ -1,5 +1,5 @@
 import React from 'react';
-import WidgetsContainer from "../containers/WidgetsContainer";
+import WidgetsContainer from "./WidgetsContainer";
 import { hot } from 'react-hot-loader';
 
 class App extends React.Component {
