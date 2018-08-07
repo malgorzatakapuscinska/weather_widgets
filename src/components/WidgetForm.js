@@ -6,21 +6,21 @@ class WidgetForm extends React.Component {
     this.state = {
       searchingText: ''
     };
-    this.onChange = this.onChange.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  onChange (event) {
-    const searchingText = event.target.value;
+  handleChange (e) {
+    const searchingText = e.target.value;
     console.log(searchingText);
     this.setState({searchingText: searchingText});
     if (searchingText.length >2){
       this.props.onWidgetFormSubmit(searchingText);
     }
   }
-  onKeyUp (event) {
-    if(event.keykode === 13){
-       this.props.handleWidgetFormSubmit(this.state.searchingText);
+  handleKeyUp (e)  {
+    if(e.keyCode == 13){
+       this.props.onWidgetFormSubmit(this.state.searchingText);
     }
   }
   render () {
@@ -30,8 +30,8 @@ class WidgetForm extends React.Component {
         <label>
         Name
           <input type="text" value={this.state.searchingText}
-            onChange={this.onChange}
-            onKeyUp={this.onKeyUp}
+            onChange={this.handleChange}
+            onKeyUp={this.handleKeyUp}
           />
         </label>
       </form>

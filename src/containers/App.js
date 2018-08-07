@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import WidgetsContainer from "./WidgetsContainer";
+import WidgetsContainer from './WidgetsContainer';
+import UserForm from '../components/UserForm';
 import { hot } from 'react-hot-loader';
 
 class App extends Component {
@@ -14,13 +15,14 @@ class App extends Component {
       widgetsNumber: '',
       searchingText: ''
     };
-    this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);
+    /*this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);*/
   }
   handleWidgetFormSubmit(searchingText) {
     const chosenCity = searchingText;
     this.setState({searchingText: chosenCity});
     console.log(searchingText);
   }
+
   render () {
     console.log(this.state);
     return (
@@ -28,7 +30,8 @@ class App extends Component {
         <div className="AppHeader">
           <h1> I am app Header </h1>
         </div>
-        <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={this.handleWidgetFormSubmit}/>
+        <UserForm />
+        <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={(searchingText) => this.handleWidgetFormSubmit(searchingText)}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>
         </div>
