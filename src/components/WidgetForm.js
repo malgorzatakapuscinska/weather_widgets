@@ -12,19 +12,21 @@ class WidgetForm extends React.Component {
 
   onChange (event) {
     const searchingText = event.target.value;
+    console.log(searchingText);
     this.setState({searchingText: searchingText});
     if (searchingText.length >2){
-      this.props.onSeaarch(searchingText);
+      this.props.onWidgetFormSubmit(searchingText);
     }
   }
   onKeyUp (event) {
     if(event.keykode === 13){
-       this.props.onSearch(this.state.searchingText);
+       this.props.handleWidgetFormSubmit(this.state.searchingText);
     }
   }
   render () {
+    console.log(this.props.onWidgetFormSubmit);
     return (
-      <form >
+      <form onSubmit={this.props.onWidgetFormSubmit}>
         <label>
         Name
           <input type="text" value={this.state.searchingText}
