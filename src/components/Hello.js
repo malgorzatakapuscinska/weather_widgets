@@ -5,6 +5,7 @@ const Hello = () => {
     <div>
       <h1> Hello </h1>
       <p> Server test </p>
+      <p> test of hot loader</p>
     </div>
   );
 }
