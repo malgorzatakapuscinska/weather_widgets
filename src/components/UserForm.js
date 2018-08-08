@@ -20,23 +20,24 @@ class UserForm extends Component {
 
   handleChange (event) {
     console.log(event.target.value);
-    const enteredNumber = event.target.value;
+    const enteredNumber= event.target.value;
+    const enteredNumberParsed = parseInt(enteredNumber);
     /*const defaultNumber = 3;*/
 
-    /*const isNumber = typeof(enteredNumber);*/
+    const isNumber = typeof(enteredNumberParsed);
     console.log(enteredNumber);
-    /*console.log(isNumber);*/
-    this.setState({number: enteredNumber}, () => {console.log(this.state);
-    this.props.onUserFormSubmit(enteredNumber);
+    console.log(isNumber);
+    this.setState({number: enteredNumberParsed}, () => {console.log(this.state);
+    this.props.onUserFormSubmit(enteredNumberParsed);
     });
 
 
 
-    /*if(isNumber === false){
+    if(isNumber === NaN){
        console.log("Wrong value");
        widndow.alert("Wpisz cyfrę większą 3");
 
-    }*//*else if(enteredNumber >=3){
+    }/*//*else if(enteredNumber >=3){
       this.setState({number: enteredNumber});
       this.props.onUserForm(enteredNumber);*/
 
@@ -53,7 +54,10 @@ class UserForm extends Component {
      event.preventDefault();
 console.log(this.state.number);
      if(event.keyCode == 13){
-        this.props.onUserFormSubmit(this.state.number);
+        this.setState({number: 3}, function(){
+      this.props.onUserFormSubmit(this.state.number);
+    });
+
     }
    }
 
@@ -69,7 +73,7 @@ console.log(this.state.number);
           <form onSubmit={this.handleSubmit}>
             <label>
             Liczba widgetów
-              <input type="text" value={this.state.number}
+              <input type="number" value={this.state.number} min='3' max='5'
                 onChange={this.handleChange}
                 onKeyUp={this.handleKeyUp}
               />

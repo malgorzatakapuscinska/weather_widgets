@@ -9,8 +9,8 @@ class App extends Component {
     this.state = {
       cities:
         [
-          /*{id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"},
-           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"}*/
+          {id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"},
+           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"}
         ],
       widgetsNumber: '',
       searchingText: ''
@@ -43,7 +43,7 @@ class App extends Component {
           <p>I am the Header</p>
         </div>
         <div>
-          <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<=3&&this.state.cities.length===0? true:false}/>
+          <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
         </div>
         <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={this.handleWidgetFormSubmit}/>
         <div className="AppFooter">
