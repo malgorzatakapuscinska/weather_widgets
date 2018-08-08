@@ -9,29 +9,43 @@ class App extends Component {
     this.state = {
       cities:
         [
-           {id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"},
-           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"}
+          /*{id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"},
+           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "src/containers/cloudly.png"}*/
         ],
       widgetsNumber: '',
       searchingText: ''
     };
-    /*this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);*/
+    this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);
+    this.handleUserForm = this.handleUserForm.bind(this);
   }
-  handleWidgetFormSubmit(searchingText) {
-    const chosenCity = searchingText;
-    this.setState({searchingText: chosenCity});
-    console.log(searchingText);
+
+
+
+  handleWidgetFormSubmit (searchingText) {
+    const choosenCity = searchingText;
+    this.setState({searchingText: choosenCity});
+    console.log(this.state.searchingText);
+
+  }
+
+  handleUserForm (enteredNumber) {
+    const number = enteredNumber;
+    console.log(number);
+    this.setState({widgetsNumber: number}, () => {console.log(this.state.widgetsNumber)});
+
   }
 
   render () {
-    console.log(this.state);
+    console.log(this.state.cities);
     return (
       <div>
         <div className="AppHeader">
-          <h1> I am app Header </h1>
+          <p>I am the Header</p>
         </div>
-        <UserForm />
-        <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={(searchingText) => this.handleWidgetFormSubmit(searchingText)}/>
+        <div>
+          <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<=3&&this.state.cities.length===0? true:false}/>
+        </div>
+        <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={this.handleWidgetFormSubmit}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>
         </div>

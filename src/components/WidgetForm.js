@@ -6,27 +6,33 @@ class WidgetForm extends React.Component {
     this.state = {
       searchingText: ''
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  handleChange (e) {
-    const searchingText = e.target.value;
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onWidgetFormSubmit(this.state.searchingText);
+  }
+
+  handleChange (event) {
+    const searchingText = event.target.value;
     console.log(searchingText);
     this.setState({searchingText: searchingText});
-    if (searchingText.length >2){
+    if (searchingText.length >3){
       this.props.onWidgetFormSubmit(searchingText);
     }
   }
-  handleKeyUp (e)  {
-    if(e.keyCode == 13){
+  handleKeyUp = (event) =>{
+    event.preventDefault();
+    if(event.keyCode == 13){
        this.props.onWidgetFormSubmit(this.state.searchingText);
     }
   }
   render () {
-    console.log(this.props.onWidgetFormSubmit);
     return (
-      <form onSubmit={this.props.onWidgetFormSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label>
         Name
           <input type="text" value={this.state.searchingText}
