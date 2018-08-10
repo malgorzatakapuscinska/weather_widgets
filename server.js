@@ -1,5 +1,6 @@
 var express=require('express');
 var https=require('https');
+var path=require('path');
 
 var app = express();
 
@@ -7,7 +8,13 @@ app.use(express.static('build'));
 
 app.get('/', function(req, res) {
   res.send('Hello world');
-})
+});
+
+app.get('/cloudly.png', function(req, res){
+  res.sendFile(__dirname + '/src/containers/cloudly.png')
+});
+
+
 
 var server = app.listen(3000, 'localhost', function() {
   var host = server.address().address;
