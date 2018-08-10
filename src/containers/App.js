@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import WidgetsContainer from './WidgetsContainer';
 import UserForm from '../components/UserForm';
-import { hot } from 'react-hot-loader';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

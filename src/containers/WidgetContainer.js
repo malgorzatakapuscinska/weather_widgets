@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import WidgetForm from '../components/WidgetForm';
 import WidgetData from '../components/WidgetData';
 
-class WidgetContainer extends Component {
+class WidgetContainer extends React.Component {
   constructor(props) {
      super(props);
      this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick (event) {
+    event.stopPropagation();
     const cityName = this.props.city.name.toLowerCase();
     const cityWoeid = this.props.city.woeid;
     console.log(cityName);

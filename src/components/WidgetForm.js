@@ -9,6 +9,7 @@ class WidgetForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSubmit(event) {
@@ -30,14 +31,19 @@ class WidgetForm extends React.Component {
        this.props.onWidgetFormSubmit(this.state.searchingText);
     }
   }
+
+  handleClick (event) {
+    event.stopPropagation();
+  }
   render () {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} onClick={this.handleClick}>
         <label>
         Name
           <input type="text" value={this.state.searchingText}
             onChange={this.handleChange}
             onKeyUp={this.handleKeyUp}
+            onClick={this.handleClick}
           />
         </label>
       </form>
