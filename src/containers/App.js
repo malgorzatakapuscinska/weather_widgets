@@ -8,8 +8,8 @@ class App extends React.Component {
     this.state = {
       cities:
         [
-          {id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "cloudly.png"},
-           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "cloudly.png"}
+          {id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "https://s.yimg.com/os/weather/1.0.1/shadow_icon/60x60/cloudy_day_night@2x.png"},
+           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "https://s.yimg.com/os/weather/1.0.1/shadow_icon/60x60/cloudy_day_night@2x.png"}
         ],
       widgetsNumber: '',
       searchingText: ''
@@ -40,6 +40,8 @@ class App extends React.Component {
       <div>
         <div className="AppHeader">
           <p>I am the Header</p>
+          <p>Hello</p>
+          <p> I am stuck</p>
         </div>
         <div>
           <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>

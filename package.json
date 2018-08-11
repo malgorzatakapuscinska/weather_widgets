@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --inline --mode=development --hot --config ./webpack.config.js",
-    "build": "webpack --mode=production"
+    "start": "webpack-dev-server --inline --mode=development --hot --config ./webpack.development.config.js",
+    "build": "webpack --mode=production --config ./webpack.development.config.js"
   },
   "author": "Małgorzata Kapuścińska",
   "license": "ISC",

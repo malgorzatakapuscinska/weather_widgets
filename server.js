@@ -4,15 +4,14 @@ var path=require('path');
 
 var app = express();
 
-app.use(express.static('build'));
-
+/*app.use(express.static('build'));*/
 app.get('/', function(req, res) {
-  res.send('Hello world');
+  res.sendFile(__dirname + '/build/index.html');
 });
 
-app.get('/cloudly.png', function(req, res){
+/*app.get('/cloudly.png', function(req, res){
   res.sendFile(__dirname + '/src/containers/cloudly.png')
-});
+});*/
 
 
 
