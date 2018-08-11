@@ -11,6 +11,15 @@ module.exports = {
   },
   mode: 'production',
   devtool: 'eval-source-map',
+  devServer: {
+    port: 8080,
+    open: true,
+    proxy: {
+      "^/api*": {target: "http://localhost:3000/api/",
+                 secure: false
+      }
+    }
+  },
   module: {
         rules: [
             {
