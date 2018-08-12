@@ -2,7 +2,7 @@ const path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-module.exports = (env) => {
+module.exports = {
   entry: './src/index.js',
     output : {
       path: path.resolve(__dirname, './build'),
@@ -23,10 +23,6 @@ module.exports = (env) => {
     template: 'index.html',
     filename: 'index.html',
     inject: 'body'
-  }),
-  new webpack.DefinePlugin({
-     'SERVICE_URL': JSON.stringify("/api"),
-     'process.env.NODE_ENV': JSON.stringify(env.mode)
- })
+  })
 ]
 };

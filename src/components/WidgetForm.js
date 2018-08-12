@@ -21,9 +21,6 @@ class WidgetForm extends React.Component {
     const searchingText = event.target.value;
     console.log(searchingText);
     this.setState({searchingText: searchingText});
-    if (searchingText.length >3){
-      this.props.onWidgetFormSubmit(searchingText);
-    }
   }
   handleKeyUp = (event) =>{
     event.preventDefault();

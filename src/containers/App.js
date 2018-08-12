@@ -25,7 +25,7 @@ class App extends React.Component {
     this.setState({searchingText: choosenCity});
     console.log(this.state.searchingText);
 
-    const searchURL = "/api" + ':' + this.state.searchingText;
+    const searchURL = "http://localhost:3000/api/" + this.state.searchingText;
     console.log(searchURL);
 
     if(choosenCity.length !== 0) {

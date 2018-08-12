@@ -15,9 +15,9 @@ module.exports = {
     port: 8080,
     open: true,
     proxy: {
-      "^/api*": {target: "http://localhost:3000/api/",
+      "/api": {target: "http://localhost:3000/api/",
                  secure: false
-      }
+              }
     }
   },
   module: {
@@ -35,9 +35,6 @@ module.exports = {
       template: 'index.html',
       filename: 'index.html',
       inject: 'body'
-  }),
-   new webpack.DefinePlugin({
-      'SERVICE_URL': JSON.stringify("http/localhost:3000/api"),
   })
   ]
 };
