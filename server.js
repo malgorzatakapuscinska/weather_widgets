@@ -37,17 +37,33 @@ app.get('/api/:cityname', function(req, res){
   });*/
 
   let city = req.params.cityname;
+  console.log(city);
+  function getCity (city) {
+    let cityUrl = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22'+ city +'%22&format=json';
+    request(cityUrl, function( err, res, body){
+        console.log(err);
+        console.log("the body is");
+        console.log(body);
+        /* var apiResponse = body.query.results.channel.item;
+        console.log(apiResponse);*/
+    });
+  }
+  getCity(city);
   /*axios.get('http://worldclockapi.com/api/json/cet/now?callback=mycallback', )
     .then(res, function(){console.log("to jest odpowiedź na zapytanie "+ req.params.cityname +  " " + res)})
     .catch(err => {console.log(err);})*/ //not working
-    let searchtext = "select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "') and u='c'"
+    let searchtext = "(select%20woeid%20from%20geo.places(1)%20where%20text=%27"+city + "                                                                                                                                                                                                                                                                                                                                                                                                                                           %27)";
+    let url = "https://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%20in%20" +  searchtext + "&format=json";
 
-    request("https://query.yahooapis.com/v1/public/yql?q=select%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%27pabianice,%20il%27)&format=json", {json: true}, function( err, res, body){
-      console.log("the error is: " + err);
-      let response = Object.keys(res);
-      console.log("the response is" + response);
-      console.log('the body is: ' + body);
+    request(url, function( err, res, body){
+        console.log(err);
+        console.log("the body is");
+        console.log(body);
+        /* var apiResponse = body.query.results.channel.item;
+        console.log(apiResponse);*/
     });
+   /* console.log(apiResponse);
+    res.send(apiResponse);*/
   });
 
 

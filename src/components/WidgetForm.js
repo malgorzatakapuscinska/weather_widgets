@@ -36,7 +36,7 @@ class WidgetForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} onClick={this.handleClick}>
         <label>
-        Name
+        Wpisz miasto i wojweództwo po przecinku
           <input type="text" value={this.state.searchingText}
             onChange={this.handleChange}
             onKeyUp={this.handleKeyUp}
