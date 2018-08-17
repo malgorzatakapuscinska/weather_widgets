@@ -39,17 +39,26 @@ app.get('/api/:cityname', function(req, res){
       APIquery
     )}&format=json`;
 
-    request(URL, function( err, res, body, ){
+    function getWeatherData(city) {
+
+
+      const APIquery = `select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${city}")`;
+      const URL = `https://query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(
+        APIquery
+      )}&format=json`;
+   request(URL, function( err, res, body, ){
         console.log(err);
         console.log("the body is");
         console.log(res.body);
-        apiResponse = res.body;
-        console.log("Value of apiResponse variable is ")
-        console.log(apiResponse);
-
     });
 
-   res.send({apiResponse: apiResponse});
+    console.log(response);
+    return response;
+    };
+
+   apiResponse = getWeatherData(city);
+  console.log(apiResponse);
+  res.send({apiresponse: apiResponse});
   });
 
 
