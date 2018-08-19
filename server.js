@@ -22,7 +22,7 @@ app.get('/api/:id/:cityname', function(req, res){
   let cityData={}; // stores data of city with id=req.params.id
   let cityName = req.params.cityname;
   let city = req.params.cityname;
-  cityData.id=uuid();
+  cityData.id = req.params.id;
   cityData.name=cityName;
   console.log(cityData);
 
@@ -73,6 +73,7 @@ app.get('/api/:id/:cityname', function(req, res){
         cityData.country = response.query.results.channel.location.country;
         cityData.humidity = response.query.results.channel.item.condition.text;
         cityData.temperature = response.query.results.channel.item.condition.temp;
+        cityData.url = response.query.results.channel.item.link.slice(63,115);
         console.log(cityData);
       })
       .catch(function(error){

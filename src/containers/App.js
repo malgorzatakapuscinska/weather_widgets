@@ -7,17 +7,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cities:
-        [
-          {id: 1, name: "Pabianice", url: "https://www.yahoo.com/news/weather/poland/pabianice/pabianice-511428", date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "/src/containers/cloudly.png"},
-           {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "/src/containers/cloudly.png"}
-        ],
+      cities:[],
       widgetsNumber: '',
-      searchingText: ''
     };
 
     this.handleUserForm = this.handleUserForm.bind(this);
-  }
+    }
 
   handleUserForm (enteredNumber) {
     const number = enteredNumber;
@@ -25,18 +20,29 @@ class App extends React.Component {
     if(number) {
       this.setState({widgetsNumber: number}, (number) => {
         console.log(this.state.widgetsNumber);
-        for(let i=0; i<= number; i++){
-          this.createNewCity();
-        }
       });
+      for(let i=0; i<number; i++){
+        console.log('*');
+        this.createNewCity()
+          .then(newCity => {
+            this.setState({cities: [...this.state.cities, newCity]}, () => {console.log(this.state);});
+          })
+          .catch(reason => console.log('Coś poszło nie tak'));
+      }
     }
-}
+  }
 
-  createNewCity(enteredNumber) {
-    let newCity = {};
-    newCity.id = uuid();
-    this.setState(..., newCity);
-    // have to install npm install --save-dev babel-plugin-transform-object-rest-spread !!!!!!!
+  createNewCity() {
+    return new Promise(
+      function(resolve, reject){
+        let newCity = {};
+        newCity.id = uuid();
+        console.log(newCity);
+        if(newCity.id !== 0){
+          resolve(newCity);
+        }else {reject(reason);}
+
+    });
   }
 
   render () {
@@ -45,8 +51,6 @@ class App extends React.Component {
       <div>
         <div className="AppHeader">
           <p>I am the Header</p>
-          <p>Hello</p>
-          <p> I am stuck</p>
         </div>
         <div>
           <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
