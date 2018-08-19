@@ -1,6 +1,7 @@
 import React from 'react';
 import WidgetsContainer from './WidgetsContainer';
 import UserForm from '../components/UserForm';
+import uuid from 'uuid';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,39 +9,34 @@ class App extends React.Component {
     this.state = {
       cities:
         [
-          {id: 1, name: "Pabianice", woeid: 12591196, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "/src/containers/cloudly.png"},
+          {id: 1, name: "Pabianice", url: "https://www.yahoo.com/news/weather/poland/pabianice/pabianice-511428", date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "/src/containers/cloudly.png"},
            {id: 2, name: "Lódź", woeid: 505120, date: "2017-08-06", time: "8am", wind: "12km/h", temperature: "18stC", humidity: "79%", icon: "/src/containers/cloudly.png"}
         ],
       widgetsNumber: '',
       searchingText: ''
     };
-    this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);
+
     this.handleUserForm = this.handleUserForm.bind(this);
-  }
-
-
-
-  handleWidgetFormSubmit (searchingText) {
-    const choosenCity = searchingText;
-    this.setState({searchingText: choosenCity});
-    console.log(this.state.searchingText);
-
-    const searchURL = "http://localhost:3000/api/" + this.state.searchingText;
-    console.log(searchURL);
-
-    if(choosenCity.length !== 0) {
-      let xhr = new XMLHttpRequest;
-      xhr.open('GET', searchURL, true);
-      xhr.send();
-    }
-
   }
 
   handleUserForm (enteredNumber) {
     const number = enteredNumber;
     console.log(number);
-    this.setState({widgetsNumber: number}, () => {console.log(this.state.widgetsNumber)});
+    if(number) {
+      this.setState({widgetsNumber: number}, (number) => {
+        console.log(this.state.widgetsNumber);
+        for(let i=0; i<= number; i++){
+          this.createNewCity();
+        }
+      });
+    }
+}
 
+  createNewCity(enteredNumber) {
+    let newCity = {};
+    newCity.id = uuid();
+    this.setState(..., newCity);
+    // have to install npm install --save-dev babel-plugin-transform-object-rest-spread !!!!!!!
   }
 
   render () {
@@ -55,7 +51,7 @@ class App extends React.Component {
         <div>
           <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
         </div>
-        <WidgetsContainer cities={this.state.cities} onWidgetFormSubmit={this.handleWidgetFormSubmit}/>
+        <WidgetsContainer cities={this.state.cities}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>
         </div>

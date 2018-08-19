@@ -10,18 +10,13 @@ class WidgetContainer extends React.Component {
 
   handleClick (event) {
     event.stopPropagation();
-    const cityName = this.props.city.name.toLowerCase();
-    const cityWoeid = this.props.city.woeid;
-    console.log(cityName);
-    const URL = 'https://www.yahoo.com/news/weather/poland/' + cityName +  '/' + cityName + '-' + cityWoeid;
-    window.open(URL);
+    window.open(this.props.city.url);
   }
 
   render () {
-    console.log(this.props);
     return (
       <div className="widgetContainer" onClick={this.handleClick}>
-        <WidgetForm onWidgetFormSubmit={this.props.onWidgetFormSubmit} />
+        <WidgetForm cityId={this.props.city.id} />
         <WidgetData city={this.props.city}/>
       </div>
     );
