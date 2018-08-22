@@ -12,12 +12,13 @@ class App extends React.Component {
     };
 
     this.handleUserForm = this.handleUserForm.bind(this);
+    this.handleWidgetFormSubmit = this.handleWidgetFormSubmit.bind(this);
     }
 
   handleUserForm (enteredNumber) {
     const number = enteredNumber;
     console.log(number);
-    if(number) {
+    if(number < 6) {
       this.setState({widgetsNumber: number}, (number) => {
         console.log(this.state.widgetsNumber);
       });
@@ -30,6 +31,11 @@ class App extends React.Component {
           .catch(reason => console.log('Coś poszło nie tak'));
       }
     }
+  }
+
+  handleWidgetFormSubmit (apiResponse) {
+    const response = apiResponse;
+    console.log(response);
   }
 
   createNewCity() {
@@ -52,10 +58,8 @@ class App extends React.Component {
         <div className="AppHeader">
           <p>I am the Header</p>
         </div>
-        <div>
-          <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
-        </div>
-        <WidgetsContainer cities={this.state.cities}/>
+        <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
+        <WidgetsContainer onSubmit={this.handleWidgetFormSubmit} cities={this.state.cities}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>
         </div>

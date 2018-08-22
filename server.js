@@ -18,7 +18,6 @@ app.use(cors({
 app.get('/api/:id/:cityname', function(req, res){
   console.log("request from " + req.params.cityname);
   console.log("widget id is " + req.params.id);
-  let cities=[];
   let cityData={}; // stores data of city with id=req.params.id
   let cityName = req.params.cityname;
   let city = req.params.cityname;
@@ -75,18 +74,13 @@ app.get('/api/:id/:cityname', function(req, res){
         cityData.temperature = response.query.results.channel.item.condition.temp;
         cityData.url = response.query.results.channel.item.link.slice(63,115);
         console.log(cityData);
+        res.send(cityData);
       })
       .catch(function(error){
         console.log(error);
       });
-
-       /*cities = body;
-        console.log(cities);
-        res.send(cities);*/
-
-      /*res.send(apiResponse);*/
-       /* console.log('Value of cities inside the request block-');
-        console.log(cities);*/
+      console.log("Value of citydata before end of app.get");
+      console.log(cityData);
   });
 
 

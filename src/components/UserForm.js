@@ -52,11 +52,11 @@ class UserForm extends React.Component {
 
    handleKeyUp = (event) =>{
      event.preventDefault();
-console.log(this.state.number);
+     console.log(this.state.number);
      if(event.keyCode == 13){
         this.setState({number: 3}, function(){
-      this.props.onUserFormSubmit(this.state.number);
-    });
+        this.props.onUserFormSubmit(this.state.number);
+      });
 
     }
    }

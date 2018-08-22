@@ -10,14 +10,13 @@ class WidgetForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleWidgetFormSubmit =this.handleWidgetFormSubmit.bind(this);
+
   }
 
   handleSubmit(event) {
     event.preventDefault();
     const cityId = this.props.cityId;
     console.log(this.props.cityId);
-    /*this.props.onWidgetFormSubmit(this.state.searchingText);*/
     const searchURL = "http://localhost:3000/api/" + cityId+  "/" + this.state.searchingText;
     console.log(searchURL);
     console.log(this.state.searchingText);
@@ -27,6 +26,12 @@ class WidgetForm extends React.Component {
     } else {
       let xhr = new XMLHttpRequest;
       xhr.open('GET', searchURL, true);
+      xhr.onload(function(){
+        if(request.status === 200){
+          console.log(request.response);
+          this.props.onWidgetFormSubmit(request.response);
+        }
+      })
       xhr.send();
      }
   }
@@ -48,24 +53,7 @@ class WidgetForm extends React.Component {
     event.stopPropagation();
   }
 
-  handleWidgetFormSubmit (searchingText) {
-    /*const choosenCity = searchingText;*/
-    /*this.setState({searchingText});
-    console.log(searchingText);
-    console.log(this.state.searchingText);
-    searchingText = "";*/
-    const searchURL = "http://localhost:3000/api/" + this.state.searchingText;
-    console.log(searchURL);
-    /*const x = !searchingText;
-    console.log(x);*/
-    if(!searchingText) {
-      return ;
-    } else {
-      let xhr = new XMLHttpRequest;
-      xhr.open('GET', searchURL, true);
-      xhr.send();
-     }
-  }
+
 
   render () {
     return (
