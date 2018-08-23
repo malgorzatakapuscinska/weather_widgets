@@ -33,9 +33,23 @@ class App extends React.Component {
     }
   }
 
-  handleWidgetFormSubmit (apiResponse) {
-    const response = apiResponse;
-    console.log(response);
+  handleWidgetFormSubmit (apiResponse){
+    const apiRes = apiResponse;
+    const id = apiRes.id;
+    console.log(apiResponse);
+    console.log(id);
+    console.log(this.findCity);
+    console.log(this.state.cities[0]);
+    const city = this.state.cities.findIndex((city) => city.id === id);
+    console.log(city);
+    /*this.state.cities[0] = apiRes;
+    console.log(this.state.cities[0]);*/
+    this.setState(this.state.cities[city] = apiRes);
+  }
+
+  findCity (id) {
+    if(this.state.cities.id === id)
+   return this.state.cities.id ;
   }
 
   createNewCity() {
@@ -59,7 +73,7 @@ class App extends React.Component {
           <p>I am the Header</p>
         </div>
         <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
-        <WidgetsContainer onSubmit={this.handleWidgetFormSubmit} cities={this.state.cities}/>
+        <WidgetsContainer formFunction={this.handleWidgetFormSubmit} cities={this.state.cities}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>
         </div>

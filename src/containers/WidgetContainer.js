@@ -14,9 +14,10 @@ class WidgetContainer extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <div className="widgetContainer" onClick={this.handleClick}>
-        <WidgetForm cityId={this.props.city.id} />
+        <WidgetForm cityId={this.props.city.id} formFunction={this.props.formFunction} />
         <WidgetData city={this.props.city}/>
       </div>
     );
