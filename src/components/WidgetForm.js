@@ -12,8 +12,11 @@ class WidgetForm extends React.Component {
 
   }
 
+  keys = [];
+
   handleSubmit(event) {
-    event.preventDefault();
+    if(!event) {
+
     const cityId = this.props.cityId;
     console.log(this.props.cityId);
     const searchURL = "http://localhost:3000/api/" + cityId+  "/" + this.state.searchingText;
@@ -35,6 +38,7 @@ class WidgetForm extends React.Component {
         });
       xhr.send();
      }
+   }
   }
 
   handleChange (event) {
@@ -42,12 +46,23 @@ class WidgetForm extends React.Component {
     console.log(searchingText);
     this.setState({searchingText});
   }
-  handleKeyUp = (event) =>{
-    event.preventDefault();
-    if(event.keyCode == 13){
-       /*this.props.onWidgetFormSubmit(this.state.searchingText);*/
-      this.setState({searchingText: event.target.value});
+
+  handleKeyDown = (event) => {
+    this.keys[event.keyCode] = true;
+    console.log(this.keys);
+    console.log(event.keyCode);
+    if ( this.keys[17] && this.keys[13] ) {
+      this.handleSubmit();
     }
+  }
+
+  handleKeyUp = (event) =>{
+    this.keys[event.keyCode] = false;
+    console.log(this.keys);
+    /*event.preventDefault();
+    if(event.keyCode == 13){
+      this.setState({searchingText: event.target.value});
+    }*/
   }
 
   handleClick (event) {
@@ -65,6 +80,7 @@ class WidgetForm extends React.Component {
           <input type="text" value={this.state.searchingText}
             onChange={this.handleChange}
             onKeyUp={this.handleKeyUp}
+            onKeyDown={this.handleKeyDown}
             onClick={this.handleClick}
           />
         </label>
