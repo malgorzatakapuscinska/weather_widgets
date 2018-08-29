@@ -22,7 +22,6 @@ class UserForm extends React.Component {
     console.log(event.target.value);
     const enteredNumber= event.target.value;
     const enteredNumberParsed = parseInt(enteredNumber);
-    /*const defaultNumber = 3;*/
 
     const isNumber = typeof(enteredNumberParsed);
     console.log(enteredNumber);
@@ -30,25 +29,7 @@ class UserForm extends React.Component {
     this.setState({number: enteredNumberParsed}, () => {console.log(this.state);
     this.props.onUserFormSubmit(enteredNumberParsed);
     });
-
-
-
-    if(isNumber === NaN){
-       console.log("Wrong value");
-       widndow.alert("Wpisz cyfrę większą 3");
-
-    }/*//*else if(enteredNumber >=3){
-      this.setState({number: enteredNumber});
-      this.props.onUserForm(enteredNumber);*/
-
-      } /*else if(enteredNumber === undefined && event.keyCode === 13){
-        enterdNumber = defaultNumber;
-
-        this.setState({number: enteredNumber},function() {
-          this.props.onUserForm(enteredNumber);
-        });
-      }
-   }*/
+  }
 
    handleKeyUp = (event) =>{
      event.preventDefault();
@@ -73,7 +54,7 @@ class UserForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <label>
             Liczba widgetów
-              <input type="number" value={this.state.number} min='3' max='5'
+              <input type="text" value={this.state.number}
                 onChange={this.handleChange}
                 onKeyUp={this.handleKeyUp}
               />

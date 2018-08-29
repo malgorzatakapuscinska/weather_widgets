@@ -65,7 +65,7 @@ class App extends React.Component {
     });
   }
 
-  render () {
+  render (){
     console.log(this.state.cities);
     return (
       <div>

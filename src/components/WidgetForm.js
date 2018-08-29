@@ -1,5 +1,4 @@
 import React from 'react';
-
 class WidgetForm extends React.Component {
   constructor (props) {
     super(props);
@@ -62,7 +61,7 @@ class WidgetForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} onClick={this.handleClick}>
         <label>
-        Wpisz miasto
+        Wpisz miasto:
           <input type="text" value={this.state.searchingText}
             onChange={this.handleChange}
             onKeyUp={this.handleKeyUp}
