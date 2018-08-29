@@ -14,8 +14,7 @@ class WidgetForm extends React.Component {
 
   keys = [];
 
-  handleSubmit(event) {
-    if(!event) {
+  handleSubmit() {
 
     const cityId = this.props.cityId;
     console.log(this.props.cityId);
@@ -38,7 +37,7 @@ class WidgetForm extends React.Component {
         });
       xhr.send();
      }
-   }
+
   }
 
   handleChange (event) {
@@ -51,6 +50,9 @@ class WidgetForm extends React.Component {
     this.keys[event.keyCode] = true;
     console.log(this.keys);
     console.log(event.keyCode);
+    if(event.keyCode === 13) {
+      event.preventDefault();
+    }
     if ( this.keys[17] && this.keys[13] ) {
       this.handleSubmit();
     }
@@ -74,7 +76,7 @@ class WidgetForm extends React.Component {
   render () {
     console.log(this.props);
     return (
-      <form onSubmit={this.handleSubmit} onClick={this.handleClick}>
+      <form  onClick={this.handleClick}>
         <label>
         Wpisz miasto:
           <input type="text" value={this.state.searchingText}
