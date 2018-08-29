@@ -59,7 +59,7 @@ class WidgetForm extends React.Component {
   }
 
   handleKeyUp = (event) =>{
-    this.keys[event.keyCode] = false;
+    this.keys = [];
     console.log(this.keys);
     /*event.preventDefault();
     if(event.keyCode == 13){
