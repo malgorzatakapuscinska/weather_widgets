@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 class WidgetForm extends React.Component {
   constructor (props) {
     super(props);
@@ -14,20 +15,26 @@ class WidgetForm extends React.Component {
 
   keys = [];
 
-  handleSubmit() {
+  handleSubmit () {
 
-    const cityId = this.props.cityId;
+    const {cityId, formFunction} = this.props;
+    const {searchingText} = this.state;
     console.log(this.props.cityId);
-    const searchURL = "http://localhost:3000/api/" + cityId+  "/" + this.state.searchingText;
-    console.log(searchURL);
-    console.log(this.state.searchingText);
-    console.log(this.props.formFunction);
+    const searchURL = `http://localhost:3000/api/${cityId}/${searchingText}`;
 
-    const self = this;
-    if(!this.state.searchingText) {
-      return ;
-    } else {
-        let xhr = new XMLHttpRequest();
+    console.log(searchURL);
+    console.log(searchingText);
+    console.log(formFunction);
+
+    !searchingText ? null : axios.get(searchURL)
+      .then(function (response) {
+        console.log(response.data);
+        formFunction(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+        /*let xhr = new XMLHttpRequest();
         xhr.open('GET', searchURL, true);
         xhr.addEventListener('load', function(){
           if(xhr.status === 200){
@@ -35,9 +42,7 @@ class WidgetForm extends React.Component {
             self.props.formFunction(JSON.parse(xhr.response));
           }
         });
-      xhr.send();
-     }
-
+      xhr.send();*/
   }
 
   handleChange (event) {
@@ -50,15 +55,11 @@ class WidgetForm extends React.Component {
     this.keys[event.keyCode] = true;
     console.log(this.keys);
     console.log(event.keyCode);
-    if(event.keyCode === 13) {
-      event.preventDefault();
-    }
-    if ( this.keys[17] && this.keys[13] ) {
-      this.handleSubmit();
-    }
+    event.keyCode === 13 ? event.preventDefault() : null;
+    this.keys[17] && this.keys[13] ? this.handleSubmit() : null;
   }
 
-  handleKeyUp = (event) =>{
+  handleKeyUp = (event) => {
     this.keys = [];
     console.log(this.keys);
     /*event.preventDefault();
@@ -71,15 +72,15 @@ class WidgetForm extends React.Component {
     event.stopPropagation();
   }
 
-
-
   render () {
     console.log(this.props);
+    const {searchingText} = this.state;
+    console.log(searchingText);
     return (
       <form  onClick={this.handleClick}>
         <label>
         Wpisz miasto:
-          <input type="text" value={this.state.searchingText}
+          <input type="text" value={searchingText}
             onChange={this.handleChange}
             onKeyUp={this.handleKeyUp}
             onKeyDown={this.handleKeyDown}
