@@ -17,16 +17,16 @@ class App extends React.Component {
 
   handleUserForm (enteredNumber) {
     const number = enteredNumber;
-    console.log(number);
-    if(number < 6) {
+    console.log(enteredNumber);
+    if (number < 6) {
       this.setState({widgetsNumber: number}, (number) => {
         console.log(this.state.widgetsNumber);
       });
-      for(let i=0; i<number; i++){
+      for (let i=0; i<number; i++){
         console.log('*');
         this.createNewCity()
           .then(newCity => {
-            this.setState({cities: [...this.state.cities, newCity]}, () => {console.log(this.state);});
+            this.setState({ cities: [...this.state.cities, newCity]}, () => {console.log(this.state);});
           })
           .catch(reason => console.log('Coś poszło nie tak'));
       }
@@ -48,8 +48,7 @@ class App extends React.Component {
   }
 
   findCity (id) {
-    if(this.state.cities.id === id)
-   return this.state.cities.id ;
+    this.state.cities.id === id ? this.state.cities.id : null ;
   }
 
   createNewCity() {
@@ -72,7 +71,7 @@ class App extends React.Component {
         <div className="AppHeader">
           <p>I am the Header</p>
         </div>
-        <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber<3&&this.state.cities.length===0? true:false}/>
+        <UserForm  onUserFormSubmit={this.handleUserForm} isCorrect={this.state.widgetsNumber < 3 && this.state.cities.length === 0 ? true : false}/>
         <WidgetsContainer formFunction={this.handleWidgetFormSubmit} cities={this.state.cities}/>
         <div className="AppFooter">
           <h2>I am appFooter</h2>

@@ -9,7 +9,7 @@ module.exports = {
       path: path.resolve(__dirname, './build'),
       filename: 'app.boundle.js'
   },
-  mode: 'production',
+  mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
     port: 8080,
@@ -25,7 +25,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: ["babel-loader"]
+                use: [
+                  "babel-loader",
+                ]
             }
         ]
  },
